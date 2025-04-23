@@ -1,4 +1,4 @@
-
+# Importing all required packages
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -58,14 +58,18 @@ st.markdown("""
         max-width: auto;
         margin: 0 auto;
         padding: 2rem;
-        background: black; /* Black background */
-        color: white; /* White text color */
+        background: #ffffff; /* White background for light theme */
+        color: #333333; /* Dark gray text */
         font-family: 'Arial', sans-serif;
     }
 
     /* Headers and Subheaders */
     h1, h2, h3, h4, h5, h6 {
-        color: rgba(0, 138, 0, 1); /* Green color for headers */
+        color: #ffffff; /* White text on green background */
+        background: rgb(0, 138, 0); /* Green background */
+        padding: 0.5rem 1rem; /* Add padding for better appearance */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         text-align: center;
     }
 
@@ -74,90 +78,105 @@ st.markdown("""
         max-width: 400px;
         margin: 100px auto;
         padding: 2rem;
-        background: black; /* Black background */
+        background: #f5f5f5; /* Light gray background for container */
         border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.2); /* Green shadow for contrast */
-        color: white; /* White text */
-        background: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        color: #333333; /* Dark gray text */
     }
 
     /* Input Fields */
     .stTextInput input[type="text"], .stTextInput input[type="password"] {
-        background: #1a1a1a; /* Dark gray background */
-        color: white; /* White text */
-        border: none;
+        background: #ffffff; /* White background for inputs */
+        color: #333333; /* Dark gray text for readability */
+        border: 1px solid #cccccc; /* Light gray border */
         border-radius: 8px;
         padding: 1rem;
         width: 100%;
-        transition: background 0.3s, box-shadow 0.3s;
+        transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     /* Placeholder Text */
     .stTextInput input[type="text"]::placeholder, .stTextInput input[type="password"]::placeholder {
-        color: rgba(255, 255, 255, 0.6); /* Light gray placeholder text */
+        color: #999999; /* Medium gray placeholder text */
     }
 
     /* Hover Effect for Input Fields */
     .stTextInput input[type="text"]:hover, .stTextInput input[type="password"]:hover {
-        background: rgba(255, 255, 255, 0.1); /* Slightly lighter background on hover */
-        box-shadow: 0 2px 10px rgba(0, 255, 0, 0.1); /* Green shadow on hover */
+        border-color: #666666; /* Darker gray border on hover */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow on hover */
     }
 
     /* Focus Effect for Input Fields */
     .stTextInput input[type="text"]:focus, .stTextInput input[type="password"]:focus {
-        background: rgba(255, 255, 255, 0.2); /* Lighter background on focus */
+        border-color: rgb(0, 138, 0); /* Green border on focus to match theme */
         outline: none;
-        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.2); /* Stronger green shadow on focus */
+        box-shadow: 0 4px 20px rgba(0, 138, 0, 0.2); /* Green shadow on focus */
     }
 
     /* Buttons */
     .stButton>button {
-        background: #2980b9; /* Blue background */
-        color: white; /* White text */
+        background: rgb(0, 138, 0); /* Green background to match headers */
+        color: #ffffff; /* White text for contrast */
         border-radius: 8px;
         padding: 0.8rem 2rem;
         font-weight: bold;
         transition: background 0.3s;
     }
     .stButton>button:hover {
-        background: #1a7a9e; /* Darker blue on hover */
+        background: rgb(0, 115, 0); /* Slightly darker green on hover */
+    }
+
+    /* Dropdowns (Selectbox) */
+    .stSelectbox > div > div {
+        background: #f5f5f5; /* Light gray background for dropdown */
+        color: #333333; /* Dark gray text for readability */
+        border: 1px solid #cccccc; /* Light gray border */
+        border-radius: 8px;
+    }
+    .stSelectbox > div > div:hover {
+        border-color: #666666; /* Darker gray border on hover */
     }
 
     /* Sidebar */
     .sidebar {
-        background: #1a1a1a; /* Dark gray background */
+        background: #f5f5f5; /* Light gray background for sidebar */
         border-radius: 15px;
         padding: 2rem;
-        box-shadow: 0 2px 10px rgba(0, 255, 0, 0.1); /* Green shadow */
-        color: white; /* White text */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+        color: #333333; /* Dark gray text for readability */
     }
+
+    /* Metric Cards */
     .metric-card { 
-            background-color: #f8f9fa; 
-            border-radius: 10px; 
-            padding: 1rem; margin: 0.5rem 0; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-            transition: transform 0.2s; }
+        background-color: #fafafa; /* Very light gray background */
+        border-radius: 10px; 
+        padding: 1rem; 
+        margin: 0.5rem 0; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        transition: transform 0.2s; 
+    }
     .metric-card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        transform: translateY(-2px); 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow on hover */
+    }
 
     /* News Cards */
     .news-card {
-        background: #1a1a1a; /* Dark gray background */
-        border-left: 5px solid #2980b9; /* Blue left border */
+        background: #fafafa; /* Very light gray background */
+        border-left: 5px solid rgb(0, 138, 0); /* Green left border to match theme */
         padding: 1rem;
         margin: 1rem 0;
         border-radius: 8px;
-        color: white; /* White text */
+        color: #333333; /* Dark gray text for readability */
     }
 
     /* Links */
     a {
-        color: #2980b9; /* Blue links */
+        color: rgb(0, 138, 0); /* Green links to match theme */
         text-decoration: none;
     }
     a:hover {
-        color: #1a7a9e; /* Darker blue on hover */
+        color: rgb(0, 115, 0); /* Slightly darker green on hover */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -392,7 +411,6 @@ def get_symbol_from_name(stock_input):
             {"symbol": "CM.TO", "name": "Canadian Imperial Bank of Commerce"}
         ]
         
-        # For larger deployments, consider loading this from a file or database
         
         # Search for matches by company name
         company_names = [company["name"].lower() for company in common_companies]
@@ -472,7 +490,7 @@ def get_stock_data(symbol, period="1y"):
         st.error(f"Error fetching data for {symbol}: {str(e)}")
         return None, None
 
-# Other functions (create_price_chart, create_volume_chart, etc.) remain unchanged
+
 def create_price_chart(hist_data, symbol):
     fig = go.Figure()
     fig.add_trace(go.Candlestick(
@@ -503,7 +521,7 @@ def create_volume_chart(hist_data):
         x=hist_data.index,
         y=hist_data['Volume'],
         name='Volume',
-        marker_color='rgba(31, 119, 180, 0.3)'
+        marker_color='rgb(0, 138, 0)'
     ))
     fig.add_trace(go.Scatter(
         x=hist_data.index,
@@ -719,7 +737,7 @@ def main():
         st.markdown('<h4 class="header-container"> ℹ️ About </h4>', unsafe_allow_html=True)
         st.markdown("""
             This tool focuses on:
-            - US and Canadian stock market analysis
+            - North American stock market analysis
             - AI-powered financial analysis
             - Comprehensive stock metrics
             - Document upload and chat interface
@@ -731,7 +749,7 @@ def main():
     # Header Section
     with st.container():
         st.markdown('<h2 class="header-container">🤖 Advanced Stock Market Analysis</h2>', unsafe_allow_html=True)
-        st.markdown('<p class="header-subtitle"> Developed by <a href="https://www.linkedin.com/in/harbhajan21" target="_blank" style="color: #008000; text-decoration: none;">Data Solutions & Analytics Team</a> </p>', unsafe_allow_html=True)
+        st.markdown('<p class="header-subtitle" style="color: #000000;"> Developed by <a href="https://www.linkedin.com/in/harbhajan21" target="_blank" style="color: #008A00; text-decoration: none;">Data Solutions & Analytics Team</a> </p>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
     
 
@@ -878,7 +896,7 @@ def main():
             st.warning("Please enter your OpenAI API key in the sidebar to use the chatbot")
         else:
             st.markdown("### Stock Market Chatbot")
-            st.success("Ask about North American stocks, e.g., 'What is the price of TD Bank?' or 'Compare TD and BMO for the last 2 years'.")
+            st.success("Ask about North American stocks, e.g., 'What is the price of TD Bank?' or 'Compare TD and RY for the last 2 years'.")
             
             # Initialize chat history
             if "stock_chat_history" not in st.session_state:
